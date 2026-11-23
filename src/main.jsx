@@ -11,3 +11,10 @@ createRoot(document.getElementById('root')).render(
     </AppProvider>
   </StrictMode>,
 );
+
+// PWA: registra o service worker só em produção (npm run build)
+if ('serviceWorker' in navigator && import.meta.env.PROD) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('/sw.js').catch(() => {});
+  });
+}
